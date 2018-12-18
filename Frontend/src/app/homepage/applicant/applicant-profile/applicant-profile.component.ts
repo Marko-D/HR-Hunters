@@ -4,6 +4,8 @@ import { mimeType } from "../../../validators/mime-type.validator";
 import { AuthService } from "src/app/services/auth.service";
 import { ApplicantService } from "src/app/services/applicant.service";
 
+
+
 @Component({
   selector: "app-applicant-profile",
   templateUrl: "./applicant-profile.component.html",

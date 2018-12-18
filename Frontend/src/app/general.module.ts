@@ -7,6 +7,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {  ToastContainerModule } from 'ngx-toastr';
 
 import { HeaderComponent } from './homepage/header/header.component';
 import { NavigationComponent } from './homepage/header/navigation/navigation.component';
@@ -32,7 +33,7 @@ import { ADNewJobPostingComponent } from './admin-dashboard/job-postings/new-job
 import { ErrorComponent } from './error/error.component';
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewClientComponent } from './admin-dashboard/clients/new-client/new-client.component';
-
+import {AppToastrComponent} from "./toastr/app-toastr"
 @NgModule({
     declarations: [
         HeaderComponent,
@@ -57,7 +58,8 @@ import { NewClientComponent } from './admin-dashboard/clients/new-client/new-cli
         ADJobPostingsComponent,
         ADNewJobPostingComponent,
         LoginComponent,
-        NewClientComponent
+        NewClientComponent,
+        AppToastrComponent
     ],
     imports: [
         CommonModule,
@@ -71,7 +73,12 @@ import { NewClientComponent } from './admin-dashboard/clients/new-client/new-cli
         NgbAlertModule,
         NgxLoadingModule.forRoot({}),
         BrowserAnimationsModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot({
+            timeOut: 10000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+          }),
+        ToastContainerModule
     ]
 })
 
