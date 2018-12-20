@@ -12,7 +12,7 @@ import {
   filter,
   map
 } from "rxjs/operators";
-
+import {CommonService } from "src/app/services/common.service";
 @Component({
   selector: "app-add-csv",
   templateUrl: "./add-csv.component.html",
@@ -44,7 +44,8 @@ export class AddCSVComponent {
   constructor(
     private clientService: ClientService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private _service: CommonService
   ) {}
 
   ngOnInit() {
@@ -116,6 +117,41 @@ export class AddCSVComponent {
     });
   }
 
+//  upload
+  upload(event: any) {
+    let files = event.target.files;
+    //check file is valid
+    if (!this.validateFile(files[0].name)) {
+        console.log('Selected file format is not supported');
+        return false;
+    }
+
+    let fData: FormData = new FormData;
+
+    for (var i = 0; i < files.length; i++) {
+        fData.append("file", files[i]);
+    }
+    var _data = {
+        filename: 'Sample File',
+        id: '0001'
+    }
+
+    fData.append("data", JSON.stringify(_data));
+    this._service.uploadFile(fData).subscribe(
+        response => console.log(response),
+        error => console.log(error)
+    )
+}
+
+validateFile(name: String) {
+  var ext = name.substring(name.lastIndexOf('.') + 1);
+  if (ext.toLowerCase() == 'csv') {
+      return true;
+  }
+  else {
+      return false;
+  }
+}
   onSubmitCSV() {
       
   }

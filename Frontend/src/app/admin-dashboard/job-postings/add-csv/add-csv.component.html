@@ -66,7 +66,9 @@
             formControlName="csv"
             accept=".csv"
             requireCsvFile
+            (change)="upload($event)" 
           />
+         
           <div
             *ngIf="
               !newCSVForm.controls['csv'].valid &&
